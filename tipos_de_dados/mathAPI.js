@@ -80,3 +80,33 @@ console.log(`O maior valor é ${maiorValor}`);
 
 let valorRandomico = Math.random();
 console.log(valorRandomico);
+
+/*
+
+TEMPLATE LITERAL (concatenar): trata-se de uma forma de DECLARAR uma String
+onde é PERMITIDO A INTERPOLAÇÃO DE EXPRESSÕES
+
+exemplo: "String" + "String"
+
+*/
+
+let host = "localhost:";
+let port = "3000";
+let resource = "users";
+let url = "https://";
+console.log(url+host+port+resource);
+
+//faz-se a mesma coisa utilizando Template Strings ${}, sendo também considerado template literal (concatenação)
+
+
+// caso queira QUEBRA DE LINHAS NO CÓDIGO FONTE, masta adicionar ` as linhas quebradas dentro da ` CRASE. 
+let quebraDeLinhas = `1 - um
+2 - dois
+3 - três
+4 - quatro
+5 - cinco.`;
+
+console.log(quebraDeLinhas);
+//a vantagem do template literal é que o código fará isso AUTOMATICAMENTE
+// pode-se usar TAMBÉM O \n para a quebra de linhas aqui.
+
