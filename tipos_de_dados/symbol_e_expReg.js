@@ -95,3 +95,123 @@ console.log(preservado2);
 let metacaracterPreservado3 = /preservado@email.com\.br/;
 let preservado3 = metacaracterPreservado3.exec("preservado@emailXcom.br"); //o caracter preservado não sofreu modificação. ESTE IRÁ RODAR
 console.log(preservado3);
+
+
+/* 
+
+INICIANDO e FINALIZANDO OBRIGATORIAMENTE por um determinado caractere, em   .exec
+
+Iniciar em derterminado caractere    -->     ^     <--
+Finalizar em determinado caractere   -->     $     <--
+
+*/
+
+let inicializando = /joao@joao.com/;
+let inicial1 = inicializando.exec("Email: joao@joao.com");
+console.log(inicial1);
+
+let inicializando2 = /^jose@jose.com/;
+let inicial2 = inicializando2.exec("Email: jose@jose.com"); //Vai quebrar, pois o '^' FORÇOU COMEÇAR desta forma
+console.log(inicial2);
+
+let inicializando3 = /^Tenha/;
+let inicial3 = inicializando3.exec("Tenha um bom dia"); //Não vai quebrar, pois está começando com o indicado pela expressão regular
+console.log(inicial3);
+
+let finalizando = /.com$/;
+let final = finalizando.exec("exemplo@exemplo.com"); // vai rodar, por que TERMINA COM O INDICADO na expressão regular
+console.log(final);
+
+let finalizando2 = /muito obrigada$/;
+let final2 = finalizando2.exec("Formulário preenchido, muito obrigada!"); // vai quebrar, por NÃO TERMINOU DA FORMA EXATA como consta na expressão regular
+console.log(final2);
+
+// GRUPOS DE CARACTERES A SEREM SELECIONADOS OU EXCLUÍDOS
+/*
+
+[abc]   aceita os caracteres DENTRO DESTE GRUPO
+[^abc]  NÃO ACEITA os caracteres presentes neste grupo
+[0-9]   aceita caracteres de 0 a 9
+[^0-9]  não aceita caracteres de 0 a 9
+
+Aqui, o circunflexo    ^     É A NEGAÇÃO daqueles caracteres presentes nos colchetes.
+a QUANTIDADE DE CARACTERES é sempre levada em conta.
+
+
+*/
+
+let caracterSelecionado = /[a-z][a-c][a-z]/;
+let selecao = caracterSelecionado.exec("bom"); // vai quebrar, pos o segundo caracter NÃO ESTÁ INCLUSO NO PARÂMETRO OBRIGATÓRIO.
+console.log(selecao);
+
+let caracterSelecionado2 = /[a-z][a-z][a-z][a-z]/;
+let selecao2 = caracterSelecionado2.exec("boom"); //vai rodar qualquer String compatível com a quantidade de caractér passada no parâmetro da expr. regular
+console.log(selecao2);
+
+// a QUANTIDADE EXATA DE CARACTER É NECESSÁRIA para rodar ou quebrar a expressão regular passada
+
+let caracterSelecionado3 = /[0-9][0-9][0-9][0-9]/;
+let selecao3 = caracterSelecionado3.exec("O ano 1990 é de nascimento"); //vai rodar, pois os caracteres preenchem o parâmetro passado (tamanho e números)
+console.log(selecao3);
+
+let caracterSelecionado4 = /[0-9][0-9][0-9][0-9]$/;
+let selecao4 = caracterSelecionado4.exec("O ano é de 1990 no Ocidente."); //não vai rodar, pois o parâmetro está forçando terminar com o que foi passado.
+console.log(selecao4);
+
+let caracterSelecionado5 = /^[0-9][0-9][0-9][0-9]/;
+let selecao5 = caracterSelecionado5.exec("199 é o ano de nascimento.");// não vai rodar, pois inicia como o parâmetro está forçando, mas
+                                                                        // a QUANTIDADE DE CARACTERES PASSADA NO PARÂMETRO não é equivalente.
+console.log(selecao5);
+
+/*
+
+QUANTIFICADORES podem ser aplicados a caracteres, grupos, metacaracteres ou conjuntos (quantificadores são mais elegantes, quer colocar em colchetes cada um dos caracteres, a não seja que seja necessidade)
+
+{n}      quantidade ESPECÍFICA de caracteres
+{n,}     quantidade MÍNIMA de caracteres
+{n,m}    quantidade MÍNIMA E MÁXIMA A TER de caracteres presentes
+
+
+
+*/
+
+//EXEMPLO: um email com quantidade específica de caracteres caracteres
+
+let emailQuantificador = /[a-z]{7}@email.com/;
+let quantificador = emailQuantificador.exec("meuemail@email.com"); // vai rodar, pois são exatamente 7 caracteres colocados
+console.log(quantificador);
+
+let emailQuantificador2 = /[a-z]{10}@email.com/;
+let quantificador2 = emailQuantificador2.exec("meuemail@email.com"); // o mesmo código não roda, pois não corresponde ao número de caracteres passados.
+console.log(quantificador2);
+
+// EXEMPLO: um email com um mínimo e um máximo de caracteres
+
+let emailQuantificador3 = /[a-z]{4,10}@email.com/;
+let quantificador3 = emailQuantificador3.exec("vairodar@email.com"); // vai rodar, pois obedece ao parâmetro: letras e quantidades mínima e máximas de caracteres.
+console.log(quantificador3);
+
+let emailQuantificador4 = /[a-z]{5,}@email.com/;
+let quantificador4 = emailQuantificador4.exec("jose@email.com"); // não vai rodar, pois não obedece à quantidade mínima passada.
+console.log(quantificador4);
+
+/*
+aqui NÃO USAMOS AS CHAVES {}
+
+?    zero ou um caracter
+*    zero ou mais caracteres
++    um ou mais caracteres que devem constar 
+
+*/
+
+//// EXEMPLO: um email com quantidade livre de caracteres
+
+let emailQuantificador5 = /[a-z]+@email.com/; // um ou mais caracteres, de a à z, são liberados
+let quantificador5 = emailQuantificador5.exec("kjlbhglkjsbegbaebfgçabwfbvakw@email.com");
+console.log(quantificador5);
+
+/*
+
+continuação METACARACTERES
+
+*/
