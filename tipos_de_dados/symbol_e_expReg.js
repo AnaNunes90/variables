@@ -214,4 +214,62 @@ console.log(quantificador5);
 
 continuação METACARACTERES
 
+Aqui estão algumas REPRESENTAÇÕES DE METACARACTERES, 
+--->SEMPRE ACOMPANHADOS DE QUANTIFICADORES:<---
+
+\w     representa o conjunto (COMPLETO) [a-zA-Z0-9_] ----> underline equivale à espaço  
+
+\W     representa o conjunto [^a-zA-Z0-9_]
+
+\d     o conjunto [0-9]
+
+\D     o conjunto [^0-9]
+
+\s     espaço em branco
+
+\S     espaço que NÃO ESTÁ EM BRANCO
+
+\n     QUEBRA DE LINHA
+
+\t     representa um tab
+
 */
+
+
+// email com metacaracter que abrange números e letras maiusculas e minusculas
+
+let contmeta = /^\w+@email.com/; //deve iniciar necessariamente com este parâmetro, dentro do conjunto \w
+let saidaContMeta = contmeta.exec("meta@email.com"); 
+console.log(saidaContMeta);
+
+let contmeta2 = /\w+@\w+.com/; // contém livre nome e livre nomeclatura antes do @ acrecido de .com
+let saidaContMeta2 = contmeta2.exec("emailCadastrado1987@email.com");
+console.log(saidaContMeta2);
+
+let contmeta3 = /^\w{4,10}@\w{5,10}.\w{2,3}$/;
+let saidaContMeta3 = contmeta3.exec("jose@email.com");
+console.log(saidaContMeta3);
+
+let contmeta4 = /^\d{10}@email.edu.br/;
+let saidaContMeta4 = contmeta4.exec("2023152630@email.edu.br");
+console.log(saidaContMeta4);
+
+/*
+
+GRUPOS DE CAPTURA
+
+( )   determina um GRUPO DE CAPTURA para realizar a EXTRAÇÃO DE VALORES de determinada String
+      aqui, ficará fácil LOCALIZAR ONDE ESTÁ DETERMINADA INFORMAÇÃO
+*/
+
+// EXEMPLO: busque o id e email do usuário separadamente, por POSIÇÃO
+
+let capturaCaracter = /^(\w+)@(\w{5,8})(.\w{2,3})(.\w{2})$/;
+let saidaCaptura = capturaCaracter.exec("captura@email.com.br");
+console.log(saidaCaptura);
+console.log(`Seu id é ${saidaCaptura[1]}, e seu email é ${saidaCaptura[2]}`);
+
+let capturaCaracter2 = /^(\d{4,10})@(\w+).com/; // nome do usuário apenas com números \d
+let saidaCaptura2 = capturaCaracter2.exec("2023938@email.com.br");
+console.log(saidaCaptura2);
+
